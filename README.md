@@ -1,1 +1,1 @@
-# golang-basic
+# golang-basicgo mod init golang-basic
