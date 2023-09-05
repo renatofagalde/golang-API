@@ -51,3 +51,21 @@ func NewInternalServerError(message string, causes []Cause) *RestErr {
 		Code:    http.StatusInternalServerError,
 	}
 }
+
+// forbidden
+func NewForbiddenError(message string, causes []Cause) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "forbidden",
+		Code:    http.StatusInternalServerError,
+	}
+}
+
+// notfound error
+func NewNotFoundError(message string, causes []Cause) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "forbidden",
+		Code:    http.StatusInternalServerError,
+	}
+}
