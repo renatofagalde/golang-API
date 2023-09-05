@@ -24,6 +24,10 @@ func NewRestErr(message, err string, code int64, causes []Cause) *RestErr {
 	}
 }
 
+func (r *RestErr) Error() string {
+	return r.Message
+}
+
 // bad request
 func NewBadRequestError(message string) *RestErr {
 	return &RestErr{
