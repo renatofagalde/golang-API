@@ -42,3 +42,12 @@ func NewBadRequestValidationError(message string, causes []Cause) *RestErr {
 		Causes:  causes,
 	}
 }
+
+// erro interno
+func NewInternalServerError(message string, causes []Cause) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "internal_server_Erro",
+		Code:    http.StatusInternalServerError,
+	}
+}
