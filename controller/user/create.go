@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang-basic/config/rest_err"
 	"golang-basic/controller/model/request"
+	"net/http"
 )
 
 func Create(c *gin.Context) {
@@ -17,4 +18,5 @@ func Create(c *gin.Context) {
 		return
 	}
 	fmt.Println(userRequest)
+	c.JSON(http.StatusOK, userRequest)
 }
