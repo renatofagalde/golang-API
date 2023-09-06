@@ -29,9 +29,9 @@ func ValidateUserError(validation_err error) *rest_err.RestErr {
 	var jsonErr *json.UnmarshalTypeError
 	var jsonValidationError validator.ValidationErrors
 
-	if errors.As(validation_err, jsonErr) {
+	if errors.As(validation_err, &jsonErr) {
 		return rest_err.NewBadRequestError("Invalid field type") //json enviando errado
-	} else if errors.As(validation_err, jsonValidationError) {
+	} else if errors.As(validation_err, &jsonValidationError) {
 		errorsCauses := []rest_err.Cause{}
 
 		for _, e := range validation_err.(validator.ValidationErrors) {
