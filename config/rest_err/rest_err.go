@@ -5,7 +5,7 @@ import "net/http"
 type RestErr struct {
 	Message string  `json:"message"`
 	Err     string  `json:"error"`
-	Code    int64   `json:"code"`
+	Code    int     `json:"code"`
 	Causes  []Cause `json:"causes"`
 }
 
@@ -15,7 +15,7 @@ type Cause struct {
 }
 
 // construtor
-func NewRestErr(message, err string, code int64, causes []Cause) *RestErr {
+func NewRestErr(message, err string, code int, causes []Cause) *RestErr {
 	return &RestErr{
 		Message: message,
 		Err:     err,
