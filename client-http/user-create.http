@@ -1,0 +1,11 @@
+
+### RequestUserByID
+GET http://{{host}}:{{port}}/{{user_id}}
+Content-Type: application/json
+
+### RequestCreateUser
+POST http://{{host}}:{{port}}
+Content-Type: application/json
+X-Request-ID: {{$random.uuid}}
+
+{"email": "{{email}}","password": "123","name": "usuario-1","age": 18}
