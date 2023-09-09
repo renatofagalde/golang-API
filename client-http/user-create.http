@@ -2,9 +2,28 @@
 GET http://{{host}}:{{port}}/{{user_id}}
 Content-Type: application/json
 
-### RequestCreateUser
+### RequestCreateUser-200
 POST http://{{host}}:{{port}}
 Content-Type: application/json
 X-Request-ID: {{$random.uuid}}
 
 {"email": "{{email}}","password": "{{password}}","name": "{{name}}","age": {{age}}}
+> {%
+
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 400");
+    });
+%}
+
+### RequestCreateUser-400
+POST http://{{host}}:{{port}}
+Content-Type: application/json
+X-Request-ID: {{$random.uuid}}
+
+{"email": "{{email}}"}
+> {%
+
+    client.test("Bad Request", function() {
+        client.assert(response.status === 400, "Response status is 400");
+    });
+ %}
