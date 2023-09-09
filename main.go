@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"golang-basic/config/logger"
 	"golang-basic/controller/routes"
 	"log"
 	"os"
@@ -23,4 +24,5 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(os.Getenv("TESTE"))
+	logger.Info("Iniciando")
 }
