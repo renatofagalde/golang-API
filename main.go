@@ -5,6 +5,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang-basic/config/logger"
 	"golang-basic/controller/routes"
+	controller "golang-basic/controller/user"
+	"golang-basic/model/service"
 	"log"
 	"os"
 
@@ -17,9 +19,12 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
+	//init dependencies
+	service := service.NewUserDomainService()
+	userCotnroller := controller.NewUserControllerInterface(service)
 	router := gin.Default()
 
-	routes.InitRoutes(&router.RouterGroup)
+	routes.InitRoutes(&router.RouterGroup, userCotnroller)
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}
