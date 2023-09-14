@@ -7,6 +7,7 @@ import (
 	"golang-basic/config/validation"
 	"golang-basic/controller/model/request"
 	"golang-basic/model"
+	"golang-basic/view"
 	"net/http"
 )
 
@@ -14,7 +15,7 @@ var (
 	UserDomainInterface model.UserDomainInterface
 )
 
-func Create(c *gin.Context) {
+func (uc *userControllerInterface) Create(c *gin.Context) {
 	logger.Info("init create userController", zap.String("journey", "createUser"))
 
 	var userRequest request.UserRequest
@@ -27,10 +28,11 @@ func Create(c *gin.Context) {
 	}
 	domain := model.NewUserDomain(userRequest.Email,
 		userRequest.Password, userRequest.Name, userRequest.Age)
-	if err := domain.Create(); err != nil {
+
+	if err := uc.service.Create(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
 	logger.Info("init created userController")
-	c.JSON(http.StatusOK, userRequest)
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domain))
 }

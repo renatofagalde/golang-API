@@ -1,7 +1,9 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
-func Delete(c *gin.Context) {
+func (uc *userControllerInterface) Delete(c *gin.Context) {
 
 }
