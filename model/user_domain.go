@@ -3,31 +3,45 @@ package model
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"golang-basic/config/rest_err"
 )
 
-type UserDomain struct {
-	Email    string
-	Password string
-	Name     string
-	Age      int8
+type userDomain struct {
+	email    string
+	password string
+	name     string
+	age      int8
 }
 
 // constructor
 func NewUserDomain(email string, passord string, name string, age int8) UserDomainInterface {
-	return &UserDomain{email, passord, name, age}
+	return &userDomain{email, passord, name, age}
 }
 
 type UserDomainInterface interface {
-	Create() *rest_err.RestErr
-	Update(string) *rest_err.RestErr
-	FindUser(string) (*UserDomain, *rest_err.RestErr)
-	DeleteUser(string) *rest_err.RestErr
+	GetEmail() string
+	GetPassword() string
+	GetAge() int8
+	GetName() string
+
+	EncryptPassword()
 }
 
-func (ud *UserDomain) EncryptPassword() {
+func (ud *userDomain) GetEmail() string {
+	return ud.email
+}
+func (ud *userDomain) GetName() string {
+	return ud.name
+}
+func (ud *userDomain) GetAge() int8 {
+	return ud.age
+}
+func (ud *userDomain) GetPassword() string {
+	return ud.password
+}
+
+func (ud *userDomain) EncryptPassword() {
 	hash := md5.New()
 	defer hash.Reset()
-	hash.Write([]byte(ud.Password))
-	ud.Password = hex.EncodeToString(hash.Sum(nil))
+	hash.Write([]byte(ud.password))
+	ud.password = hex.EncodeToString(hash.Sum(nil))
 }

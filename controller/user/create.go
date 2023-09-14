@@ -7,6 +7,7 @@ import (
 	"golang-basic/config/validation"
 	"golang-basic/controller/model/request"
 	"golang-basic/model"
+	"golang-basic/model/service"
 	"net/http"
 )
 
@@ -27,7 +28,10 @@ func Create(c *gin.Context) {
 	}
 	domain := model.NewUserDomain(userRequest.Email,
 		userRequest.Password, userRequest.Name, userRequest.Age)
-	if err := domain.Create(); err != nil {
+
+	service := service.NewUserDomainService()
+
+	if err := service.Create(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
