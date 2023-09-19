@@ -17,3 +17,8 @@ go get -u go.uber.org/zap
 export MONGODB_VERSION=6.0-ubi8
 docker run --name mongodb -d mongodb/mongodb-community-server:$MONGODB_VERSION
 ```
+
+### remove all container
+```shell
+$ docker container rm -f $(docker container ls -aq)
+```
