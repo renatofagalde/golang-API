@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"golang-basic/config/database/mongodb"
 	"golang-basic/config/logger"
 	"golang-basic/controller/routes"
 	controller "golang-basic/controller/user"
@@ -18,6 +19,8 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
+	mongodb.InitConnection()
 
 	//init dependencies
 	service := service.NewUserDomainService()
