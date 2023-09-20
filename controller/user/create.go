@@ -32,8 +32,9 @@ func (uc *userControllerInterface) Create(c *gin.Context) {
 	domainResult, err := uc.service.Create(domain)
 	if err != nil {
 		c.JSON(err.Code, err)
+		logger.Error("Erro ao chamar o create ", err, zap.String("journey", "createUser"))
 		return
 	}
-	logger.Info("init created userController")
+	logger.Info("init create userController", zap.String("journey", "createUser"))
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domainResult))
 }

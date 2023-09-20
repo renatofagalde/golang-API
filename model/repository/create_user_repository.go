@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.uber.org/zap"
 	"golang-basic/config/logger"
 	"golang-basic/config/rest_err"
 	"golang-basic/model"
@@ -16,7 +17,7 @@ const (
 
 func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr) {
 
-	logger.Info("Init create user repository")
+	logger.Info("init create user repository", zap.String("journey", "createUser"))
 
 	collection := ur.databaseConnection.Collection(os.Getenv(MONGO_DB_COLLECTION))
 	value := convert.ConvertDomainToEntity(userDomain)
