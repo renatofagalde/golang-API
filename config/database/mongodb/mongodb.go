@@ -2,20 +2,28 @@ package mongodb
 
 import (
 	"context"
-	"fmt"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"os"
 )
 
-func InitConnection() {
+var (
+	MONGO_DB_URL      = "MONGO_DB_URL"
+	MONGO_DB_DATABASE = "MONGO_DB_DATABASE"
+)
 
-	ctx := context.Background()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
+func NewMongoDBConnection(ctx context.Context) (*mongo.Database, error) {
+
+	mongodbUri := os.Getenv(MONGO_DB_URL)
+	mongodbDatabase := os.Getenv(MONGO_DB_DATABASE)
+
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongodbUri))
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	if err := client.Ping(ctx, nil); err != nil {
-		panic(err)
+		return nil, err
 	}
-	fmt.Println("banco conectado")
+
+	return client.Database(mongodbDatabase), nil
 }
