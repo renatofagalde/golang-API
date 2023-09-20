@@ -1,16 +1,13 @@
 package main
 
 import (
-	"fmt"
+	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+	"golang-basic/config/database/mongodb"
 	"golang-basic/config/logger"
 	"golang-basic/controller/routes"
-	controller "golang-basic/controller/user"
-	"golang-basic/model/service"
 	"log"
-	"os"
-
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -19,15 +16,19 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	//init dependencies
-	service := service.NewUserDomainService()
-	userCotnroller := controller.NewUserControllerInterface(service)
-	router := gin.Default()
+	database, err := mongodb.NewMongoDBConnection(context.Background())
+	if err != nil {
+		log.Fatalf("Error ao conectar no no banco, error=%s", err.Error())
+		return
+	}
 
-	routes.InitRoutes(&router.RouterGroup, userCotnroller)
+	userController := initDependencies(database)
+
+	//init dependencies
+	router := gin.Default()
+	routes.InitRoutes(&router.RouterGroup, userController)
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(os.Getenv("TESTE"))
 	logger.Info("Iniciando")
 }

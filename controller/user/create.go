@@ -29,10 +29,12 @@ func (uc *userControllerInterface) Create(c *gin.Context) {
 	domain := model.NewUserDomain(userRequest.Email,
 		userRequest.Password, userRequest.Name, userRequest.Age)
 
-	if err := uc.service.Create(domain); err != nil {
+	domainResult, err := uc.service.Create(domain)
+	if err != nil {
 		c.JSON(err.Code, err)
+		logger.Error("Erro ao chamar o create ", err, zap.String("journey", "createUser"))
 		return
 	}
-	logger.Info("init created userController")
-	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domain))
+	logger.Info("init create userController", zap.String("journey", "createUser"))
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domainResult))
 }
