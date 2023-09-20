@@ -1,68 +1,27 @@
 package model
 
-import (
-	"crypto/md5"
-	"encoding/hex"
-	"encoding/json"
-)
-
+// unica responsabilidade, ter o valor ou alterar o que pode ser alterado dentro do domain
+// valor real do objeto
 type userDomain struct {
-	ID       string `json:"id"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-	Name     string `json:"name"`
-	Age      int8   `json:"age"`
-}
-
-// constructor
-func NewUserDomain(email string, passord string, name string, age int8) UserDomainInterface {
-	return &userDomain{
-		Email:    email,
-		Password: passord,
-		Name:     name,
-		Age:      age,
-	}
-}
-
-type UserDomainInterface interface {
-	GetEmail() string
-	GetPassword() string
-	GetAge() int8
-	GetName() string
-
-	ToJSON() (string, error)
-	EncryptPassword()
-
-	AtribuirID(string)
-}
-
-func (ud *userDomain) ToJSON() (string, error) {
-	b, err := json.Marshal(ud)
-	if err != nil {
-		return "", err
-	}
-	return string(b), nil
+	id       string
+	email    string
+	password string
+	name     string
+	age      int8
 }
 
 func (ud *userDomain) AtribuirID(id string) {
-	ud.ID = id
+	ud.id = id
 }
 func (ud *userDomain) GetEmail() string {
-	return ud.Email
+	return ud.email
 }
 func (ud *userDomain) GetName() string {
-	return ud.Name
+	return ud.name
 }
 func (ud *userDomain) GetAge() int8 {
-	return ud.Age
+	return ud.age
 }
 func (ud *userDomain) GetPassword() string {
-	return ud.Password
-}
-
-func (ud *userDomain) EncryptPassword() {
-	hash := md5.New()
-	defer hash.Reset()
-	hash.Write([]byte(ud.Password))
-	ud.Password = hex.EncodeToString(hash.Sum(nil))
+	return ud.password
 }
