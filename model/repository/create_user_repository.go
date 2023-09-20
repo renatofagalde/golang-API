@@ -26,7 +26,6 @@ func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (mode
 		return nil, rest_err.NewInternalServerError(err.Error())
 	}
 
-	//poderia ser usado o converter, entity to domain tmb.
-	userDomain.AtribuirID(result.InsertedID.(primitive.ObjectID).String()) //cast para string
-	return userDomain, nil
+	value.ID = result.InsertedID.(primitive.ObjectID)
+	return convert.ConvertEntityToDomain(*value), nil
 }

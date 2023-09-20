@@ -11,6 +11,8 @@ func NewUserDomain(email string, passord string, name string, age int8) UserDoma
 }
 
 type UserDomainInterface interface {
+	GetID() string
+
 	GetEmail() string
 	GetPassword() string
 	GetAge() int8

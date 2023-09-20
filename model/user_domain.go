@@ -10,6 +10,10 @@ type userDomain struct {
 	age      int8
 }
 
+func (ud *userDomain) GetID() string {
+	return ud.id
+}
+
 func (ud *userDomain) AtribuirID(id string) {
 	ud.id = id
 }
