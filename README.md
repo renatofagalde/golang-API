@@ -18,6 +18,11 @@ go get -u go.mongodb.org/mongo-driver/mongo
 ```
 
 
+```shell
+go get github.com/google/uuid
+```
+
+
 ### https://www.mongodb.com/compatibility/docker
 ```shell
 export MONGODB_VERSION=6.0-ubi8

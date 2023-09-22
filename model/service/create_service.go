@@ -7,7 +7,7 @@ import (
 	"golang-basic/model"
 )
 
-func (ud *userDomainService) Create(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr) {
+func (ud *userDomainService) CreateService(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("init createUser model", zap.String("journey", "createUser"))
 	userDomain.EncryptPassword()
 	userDomainRepository, err := ud.userRepository.CreateUser(userDomain)

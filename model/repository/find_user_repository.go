@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
 	"golang-basic/config/logger"
@@ -38,6 +39,35 @@ func (ur *userRepository) FindUserByEmail(email string) (model.UserDomainInterfa
 	logger.Info("init findUserByEmail user repository successfuly",
 		zap.String("journey", "findUserByEmail"),
 		zap.String("email", email),
+		zap.String("userId", userEntity.ID.Hex()),
+	)
+	return convert.ConvertEntityToDomain(*userEntity), nil
+}
+
+func (ur *userRepository) FindUserByID(id string) (model.UserDomainInterface, *rest_err.RestErr) {
+	logger.Info("init findUserByID user repository", zap.String("journey", "findUserByID"))
+
+	collection := ur.databaseConnection.Collection(os.Getenv(MONGO_DB_COLLECTION))
+
+	userEntity := &entity.UserEntity{}
+
+	objectId, _ := primitive.ObjectIDFromHex(id)
+	filter := bson.D{{Key: "_id", Value: objectId}}
+	err := collection.FindOne(context.Background(), filter).Decode(userEntity)
+
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			errorMessage := fmt.Sprintf("Usuário não localizado com este id: %s", id)
+			logger.Error(errorMessage, err, zap.String("journey", "findUserByID"))
+			return nil, rest_err.NewNotFoundError(errorMessage)
+		}
+		errorMessage := "Erro ao pesquisar usuário"
+		logger.Error(errorMessage, err, zap.String("journey", "findUserByID"))
+		return nil, rest_err.NewInternalServerError(errorMessage)
+	}
+
+	logger.Info("init findUserByID user repository successfuly",
+		zap.String("journey", "findUserByID"),
 		zap.String("userId", userEntity.ID.Hex()),
 	)
 	return convert.ConvertEntityToDomain(*userEntity), nil

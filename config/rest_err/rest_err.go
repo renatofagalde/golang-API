@@ -69,7 +69,7 @@ func NewForbiddenError(message string, causes []Cause) *RestErr {
 func NewNotFoundError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
-		Err:     "forbidden",
-		Code:    http.StatusInternalServerError,
+		Err:     "notFound",
+		Code:    http.StatusNotFound,
 	}
 }
