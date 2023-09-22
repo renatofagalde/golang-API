@@ -66,7 +66,7 @@ func NewForbiddenError(message string, causes []Cause) *RestErr {
 }
 
 // notfound error
-func NewNotFoundError(message string, causes []Cause) *RestErr {
+func NewNotFoundError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
 		Err:     "forbidden",

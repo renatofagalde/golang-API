@@ -16,3 +16,7 @@ type UserRepository interface {
 func NewUserRepository(database *mongo.Database) UserRepository {
 	return &userRepository{database}
 }
+
+const (
+	MONGO_DB_COLLECTION = "MONGO_DB_COLLECTION"
+)
