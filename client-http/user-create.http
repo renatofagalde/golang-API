@@ -2,6 +2,12 @@
 GET http://{{host}}:{{port}}/{{user_id}}
 Content-Type: application/json
 
+### RequestUserByEmail
+GET http://{{host}}:{{port}}/email/{{email}}
+Content-Type: application/json
+
+
+
 ### RequestCreateUser-200
 POST http://{{host}}:{{port}}
 Content-Type: application/json

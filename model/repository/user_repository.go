@@ -11,8 +11,14 @@ type userRepository struct {
 }
 type UserRepository interface {
 	CreateUser(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr)
+	FindUserByEmail(email string) (model.UserDomainInterface, *rest_err.RestErr)
+	FindUserByID(id string) (model.UserDomainInterface, *rest_err.RestErr)
 }
 
 func NewUserRepository(database *mongo.Database) UserRepository {
 	return &userRepository{database}
 }
+
+const (
+	MONGO_DB_COLLECTION = "MONGO_DB_COLLECTION"
+)
