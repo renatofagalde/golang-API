@@ -10,6 +10,13 @@ func NewUserDomain(email string, passord string, name string, age int8) UserDoma
 	}
 }
 
+func NewUseUpdaterDomain(name string, age int8) UserDomainInterface {
+	return &userDomain{
+		name: name,
+		age:  age,
+	}
+}
+
 type UserDomainInterface interface {
 	GetID() string
 
