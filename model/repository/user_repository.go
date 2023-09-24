@@ -15,12 +15,9 @@ type UserRepository interface {
 	FindUserByID(id string) (model.UserDomainInterface, *rest_err.RestErr)
 
 	UpdateUser(id string, domainInterface model.UserDomainInterface) *rest_err.RestErr
+	DeleteUser(id string) *rest_err.RestErr
 }
 
 func NewUserRepository(database *mongo.Database) UserRepository {
 	return &userRepository{database}
 }
-
-const (
-	MONGO_DB_COLLECTION = "MONGO_DB_COLLECTION"
-)

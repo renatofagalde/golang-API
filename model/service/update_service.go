@@ -7,7 +7,7 @@ import (
 	"golang-basic/model"
 )
 
-func (ud *userDomainService) Update(id string, userDomain model.UserDomainInterface) *rest_err.RestErr {
+func (ud *userDomainService) UpdateService(id string, userDomain model.UserDomainInterface) *rest_err.RestErr {
 	logger.Info("init update model", zap.String("journey", "updateUser"))
 
 	err := ud.userRepository.UpdateUser(id, userDomain)

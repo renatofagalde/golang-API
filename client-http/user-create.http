@@ -46,3 +46,16 @@ X-Request-ID: {{$random.uuid}}
         client.assert(response.status === 200, "Response status is not 400");
     });
 %}
+
+
+### RequestDeleteUser-200
+DELETE http://{{host}}:{{port}}/{{user_id}}
+Content-Type: application/json
+X-Request-ID: {{$random.uuid}}
+
+> {%
+
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 400");
+    });
+%}

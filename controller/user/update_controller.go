@@ -25,7 +25,7 @@ func (uc *userControllerInterface) Update(c *gin.Context) {
 	}
 	domain := model.NewUseUpdaterDomain(userRequest.Name, userRequest.Age)
 
-	err := uc.service.Update(id, domain)
+	err := uc.service.UpdateService(id, domain)
 	if err != nil {
 		c.JSON(err.Code, err)
 		logger.Error("Erro ao chamar o update ", err, zap.String("journey", "updateUser"))
