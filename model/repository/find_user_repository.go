@@ -18,7 +18,7 @@ import (
 func (ur *userRepository) FindUserByEmail(email string) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("init findUserByEmail user repository", zap.String("journey", "findUserByEmail"))
 
-	collection := ur.databaseConnection.Collection(os.Getenv(MONGO_DB_COLLECTION))
+	collection := ur.databaseConnection.Collection(os.Getenv("MONGO_DB_COLLECTION"))
 
 	userEntity := &entity.UserEntity{}
 
@@ -47,7 +47,7 @@ func (ur *userRepository) FindUserByEmail(email string) (model.UserDomainInterfa
 func (ur *userRepository) FindUserByID(id string) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("init findUserByID user repository", zap.String("journey", "findUserByID"))
 
-	collection := ur.databaseConnection.Collection(os.Getenv(MONGO_DB_COLLECTION))
+	collection := ur.databaseConnection.Collection(os.Getenv("MONGO_DB_COLLECTION"))
 
 	userEntity := &entity.UserEntity{}
 

@@ -15,7 +15,7 @@ func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (mode
 
 	logger.Info("init create user repository", zap.String("journey", "createUser"))
 
-	collection := ur.databaseConnection.Collection(os.Getenv(MONGO_DB_COLLECTION))
+	collection := ur.databaseConnection.Collection(os.Getenv("MONGO_DB_COLLECTION"))
 	value := convert.ConvertDomainToEntity(userDomain)
 
 	result, err := collection.InsertOne(context.Background(), value)

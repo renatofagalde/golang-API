@@ -7,24 +7,18 @@ import (
 	"go.uber.org/zap"
 	"golang-basic/config/logger"
 	"golang-basic/config/rest_err"
-	"golang-basic/model"
-	"golang-basic/model/repository/entity/convert"
 	"os"
 )
 
-func (ur *userRepository) UpdateUser(id string, userDomain model.UserDomainInterface) *rest_err.RestErr {
+func (ur *userRepository) DeleteUser(id string) *rest_err.RestErr {
 
-	logger.Info("init update user repository", zap.String("journey", "updateUser"))
+	logger.Info("init delete user repository", zap.String("journey", "deleteUser"))
 
 	collection := ur.databaseConnection.Collection(os.Getenv("MONGO_DB_COLLECTION"))
-	value := convert.ConvertDomainToEntity(userDomain)
-
 	idHex, _ := primitive.ObjectIDFromHex(id)
-
 	filter := bson.D{{Key: "_id", Value: idHex}}
-	update := bson.D{{Key: "$set", Value: value}}
 
-	_, err := collection.UpdateOne(context.Background(), filter, update)
+	_, err := collection.DeleteOne(context.Background(), filter)
 	if err != nil {
 		return rest_err.NewInternalServerError(err.Error())
 	}
