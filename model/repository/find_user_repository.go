@@ -56,9 +56,9 @@ func (ur *userRepository) FindUserByEmailAndPassword(email, password string) (mo
 
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			errorMessage := fmt.Sprintf("Usuário não localizado com este email e senha")
+			errorMessage := fmt.Sprintf("Credenciais inválidas")
 			logger.Error(errorMessage, err, zap.String("journey", "FindUserByEmailAndPassword"))
-			return nil, rest_err.NewNotFoundError(errorMessage)
+			return nil, rest_err.NewForbiddenError(errorMessage)
 		}
 		errorMessage := "Erro ao pesquisar usuário"
 		logger.Error(errorMessage, err, zap.String("journey", "FindUserByEmailAndPassword"))

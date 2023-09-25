@@ -57,11 +57,11 @@ func NewInternalServerError(message string) *RestErr {
 }
 
 // forbidden
-func NewForbiddenError(message string, causes []Cause) *RestErr {
+func NewForbiddenError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
 		Err:     "forbidden",
-		Code:    http.StatusInternalServerError,
+		Code:    http.StatusForbidden,
 	}
 }
 
