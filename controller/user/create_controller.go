@@ -11,10 +11,6 @@ import (
 	"net/http"
 )
 
-var (
-	UserDomainInterface model.UserDomainInterface
-)
-
 func (uc *userControllerInterface) Create(c *gin.Context) {
 	logger.Info("init create userController", zap.String("journey", "createUser"))
 

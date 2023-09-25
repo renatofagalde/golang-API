@@ -44,6 +44,35 @@ func (ur *userRepository) FindUserByEmail(email string) (model.UserDomainInterfa
 	return convert.ConvertEntityToDomain(*userEntity), nil
 }
 
+func (ur *userRepository) FindUserByEmailAndPassword(email, password string) (model.UserDomainInterface, *rest_err.RestErr) {
+	logger.Info("init FindUserByEmailAndPassword user repository", zap.String("journey", "FindUserByEmailAndPassword"))
+
+	collection := ur.databaseConnection.Collection(os.Getenv("MONGO_DB_COLLECTION"))
+
+	userEntity := &entity.UserEntity{}
+
+	filter := bson.D{{Key: "email", Value: email}, {Key: "password", Value: password}}
+	err := collection.FindOne(context.Background(), filter).Decode(userEntity)
+
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			errorMessage := fmt.Sprintf("Credenciais inválidas")
+			logger.Error(errorMessage, err, zap.String("journey", "FindUserByEmailAndPassword"))
+			return nil, rest_err.NewForbiddenError(errorMessage)
+		}
+		errorMessage := "Erro ao pesquisar usuário"
+		logger.Error(errorMessage, err, zap.String("journey", "FindUserByEmailAndPassword"))
+		return nil, rest_err.NewInternalServerError(errorMessage)
+	}
+
+	logger.Info("init FindUserByEmailAndPassword user repository successfuly",
+		zap.String("journey", "FindUserByEmailAndPassword"),
+		zap.String("email", email),
+		zap.String("userId", userEntity.ID.Hex()),
+	)
+	return convert.ConvertEntityToDomain(*userEntity), nil
+}
+
 func (ur *userRepository) FindUserByID(id string) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("init findUserByID user repository", zap.String("journey", "findUserByID"))
 

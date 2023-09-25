@@ -59,3 +59,29 @@ X-Request-ID: {{$random.uuid}}
         client.assert(response.status === 200, "Response status is not 400");
     });
 %}
+
+### RequestLoginUser-200
+POST http://{{host}}:{{port}}/login
+Content-Type: application/json
+X-Request-ID: {{$random.uuid}}
+
+{"email": "{{email}}","password": "{{password}}"}
+> {%
+
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 400");
+    });
+%}
+
+### RequestLoginUser-400
+POST http://{{host}}:{{port}}/login
+Content-Type: application/json
+X-Request-ID: {{$random.uuid}}
+
+{"email": "{{email}}","password": "{{password_erro}}"}
+> {%
+
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 400");
+    });
+%}

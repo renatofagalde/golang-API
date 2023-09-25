@@ -15,6 +15,8 @@ type UserControllerInterface interface {
 	FindUserById(c *gin.Context)
 	FindUserByEmail(c *gin.Context)
 	Update(c *gin.Context)
+
+	Login(c *gin.Context)
 }
 
 type userControllerInterface struct {
