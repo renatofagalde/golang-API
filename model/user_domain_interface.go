@@ -17,6 +17,12 @@ func NewUseUpdaterDomain(name string, age int8) UserDomainInterface {
 	}
 }
 
+func NewUserLoginDomain(email, password string) UserDomainInterface {
+	return &userDomain{
+		email:    email,
+		password: password}
+}
+
 type UserDomainInterface interface {
 	GetID() string
 
