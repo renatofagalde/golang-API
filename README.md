@@ -22,6 +22,10 @@ go get -u go.mongodb.org/mongo-driver/mongo
 go get github.com/google/uuid
 ```
 
+```shell
+go get github.com/golang-jwt/jwt
+```
+
 
 ### https://www.mongodb.com/compatibility/docker
 ```shell
@@ -31,5 +35,10 @@ docker run --name mongodb -d mongodb/mongodb-community-server:$MONGODB_VERSION
 
 ### remove all container
 ```shell
-$ docker container rm -f $(docker container ls -aq)
+docker container rm -f $(docker container ls -aq)
+```
+
+### Stopping and Removing All Containers
+```shell
+docker ps -aq | xargs docker stop | xargs docker rm
 ```

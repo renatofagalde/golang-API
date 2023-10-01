@@ -23,12 +23,13 @@ func (uc *userControllerInterface) Login(c *gin.Context) {
 		return
 	}
 	domain := model.NewUserLoginDomain(userRequest.Email, userRequest.Password)
-	domainResult, err := uc.service.LoginService(domain)
+	domainResult, token, err := uc.service.LoginService(domain)
 	if err != nil {
 		c.JSON(err.Code, err)
 		logger.Error("Erro ao chamar o login ", err, zap.String("journey", "loginUser"))
 		return
 	}
 	logger.Info("init login userController", zap.String("journey", "loginUser"))
+	c.Header("Authorization", token)
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domainResult))
 }
