@@ -1,5 +1,7 @@
 package model
 
+import "golang-basic/config/rest_err"
+
 // constructor
 func NewUserDomain(email string, passord string, name string, age int8) UserDomainInterface {
 	return &userDomain{
@@ -35,4 +37,6 @@ type UserDomainInterface interface {
 	EncryptPassword()
 
 	AtribuirID(string)
+
+	GenerateToen() (string, *rest_err.RestErr)
 }

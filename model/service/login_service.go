@@ -7,15 +7,20 @@ import (
 	"golang-basic/model"
 )
 
-func (ud *userDomainService) LoginService(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr) {
+func (ud *userDomainService) LoginService(userDomain model.UserDomainInterface) (model.UserDomainInterface, string, *rest_err.RestErr) {
 	logger.Info("init loginUser model", zap.String("journey", "loginUser"))
 
 	userDomain.EncryptPassword()
 	user, err := ud.findUserByEmailAndPasswordService(userDomain.GetEmail(), userDomain.GetPassword())
 	if err != nil {
 		logger.Error("init loginUser erro ao validar", err, zap.String("journey", "loginUser"))
-		return nil, err
+		return nil, "", err
 	}
 
-	return user, nil
+	token, err := user.GenerateToen()
+	if err != nil {
+		return nil, "", err
+	}
+
+	return user, token, nil
 }

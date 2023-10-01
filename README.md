@@ -22,6 +22,10 @@ go get -u go.mongodb.org/mongo-driver/mongo
 go get github.com/google/uuid
 ```
 
+```shell
+go get github.com/golang-jwt/jwt
+```
+
 
 ### https://www.mongodb.com/compatibility/docker
 ```shell
