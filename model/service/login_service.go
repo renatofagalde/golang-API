@@ -17,7 +17,7 @@ func (ud *userDomainService) LoginService(userDomain model.UserDomainInterface) 
 		return nil, "", err
 	}
 
-	token, err := user.GenerateToen()
+	token, err := user.GenerateToken()
 	if err != nil {
 		return nil, "", err
 	}

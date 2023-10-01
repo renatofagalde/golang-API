@@ -38,5 +38,5 @@ type UserDomainInterface interface {
 
 	AtribuirID(string)
 
-	GenerateToen() (string, *rest_err.RestErr)
+	GenerateToken() (string, *rest_err.RestErr)
 }

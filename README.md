@@ -26,7 +26,6 @@ go get github.com/google/uuid
 go get github.com/golang-jwt/jwt
 ```
 
-
 ### https://www.mongodb.com/compatibility/docker
 ```shell
 export MONGODB_VERSION=6.0-ubi8
