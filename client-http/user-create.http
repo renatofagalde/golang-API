@@ -1,6 +1,7 @@
 ### RequestUserByID
 GET http://{{host}}:{{port}}/{{user_id}}
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW8xQHRlc3RlLmNvbS5iciIsImV4cCI6MTY5NjU4NTkyOSwiaWQiOiI2NTFmMmJlNWUyMGNkODYwMGM4NjdiNWUiLCJuYW1lIjoiVXN1YXJpbyAxIHVwZGF0ZSJ9.GYqeYOhQlw-AeuMe3WHFBdkpwQk01YVqdkCqiUSdY9E
 
 ### RequestUserByEmail
 GET http://{{host}}:{{port}}/email/{{email}}
@@ -16,7 +17,7 @@ X-Request-ID: {{$random.uuid}}
 {"email": "{{email}}","password": "{{password}}","name": "{{name}}","age": {{age}}}
 > {%
 
-    client.test("Request executed successfully", function() {
+    client.test("Request executed successfully", function () {
         client.assert(response.status === 200, "Response status is not 400");
     });
 %}
@@ -29,10 +30,10 @@ X-Request-ID: {{$random.uuid}}
 {"email": "{{email}}"}
 > {%
 
-    client.test("Bad Request", function() {
+    client.test("Bad Request", function () {
         client.assert(response.status === 400, "Response status is 400");
     });
- %}
+%}
 
 ### RequestUpdateUser-200
 PUT http://{{host}}:{{port}}/{{user_id}}
@@ -42,7 +43,7 @@ X-Request-ID: {{$random.uuid}}
 {"name": "{{name}}","age": {{age}}}
 > {%
 
-    client.test("Request executed successfully", function() {
+    client.test("Request executed successfully", function () {
         client.assert(response.status === 200, "Response status is not 400");
     });
 %}
@@ -55,7 +56,7 @@ X-Request-ID: {{$random.uuid}}
 
 > {%
 
-    client.test("Request executed successfully", function() {
+    client.test("Request executed successfully", function () {
         client.assert(response.status === 200, "Response status is not 400");
     });
 %}
@@ -68,7 +69,7 @@ X-Request-ID: {{$random.uuid}}
 {"email": "{{email}}","password": "{{password}}"}
 > {%
 
-    client.test("Request executed successfully", function() {
+    client.test("Request executed successfully", function () {
         client.assert(response.status === 200, "Response status is not 400");
     });
 %}
@@ -81,7 +82,7 @@ X-Request-ID: {{$random.uuid}}
 {"email": "{{email}}","password": "{{password_erro}}"}
 > {%
 
-    client.test("Request executed successfully", function() {
+    client.test("Request executed successfully", function () {
         client.assert(response.status === 400, "Response status is not 400");
     });
 %}

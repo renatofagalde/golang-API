@@ -2,7 +2,9 @@ package model
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
+	"golang-basic/config/logger"
 	"golang-basic/config/rest_err"
 	"os"
 	"strings"
@@ -11,6 +13,7 @@ import (
 
 var (
 	JWT_SECRET_KEY = "JWT_SECRET_KEY"
+	TOKEN_INVALIDO = "token inválido"
 )
 
 func (ud *userDomain) GenerateToken() (string, *rest_err.RestErr) {
@@ -32,29 +35,43 @@ func (ud *userDomain) GenerateToken() (string, *rest_err.RestErr) {
 	return tokenString, nil
 }
 
-func VerifyToken(tokenValue string) (UserDomainInterface, *rest_err.RestErr) {
+func VerifyTokenMiddleware(c *gin.Context) {
 	secretKey := os.Getenv(JWT_SECRET_KEY)
+
+	tokenValue := c.Request.Header.Get("Authorization")
 	token, err := jwt.Parse(RemoveBearer(tokenValue), func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); ok {
 			return []byte(secretKey), nil
 		}
-		return nil, rest_err.NewBadRequestError("token inválido")
+
+		errRest := rest_err.NewUnauthorizedRequestError(TOKEN_INVALIDO)
+		c.JSON(errRest.Code, errRest)
+		return nil, errRest
 	})
 
 	if err != nil {
-		return nil, rest_err.NewUnauthorizedRequestError("token inválido")
+		errRest := rest_err.NewUnauthorizedRequestError(TOKEN_INVALIDO)
+		c.JSON(errRest.Code, errRest)
+		c.Abort()
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok || !token.Valid {
-		return nil, rest_err.NewUnauthorizedRequestError("token inválido")
+		errRest := rest_err.NewUnauthorizedRequestError(TOKEN_INVALIDO)
+		c.JSON(errRest.Code, errRest)
+		c.Abort()
 	}
 
-	return &userDomain{
+	userDomain := &userDomain{
 		id:    claims["id"].(string),
 		email: claims["email"].(string),
 		name:  claims["name"].(string),
-	}, nil
+	}
+
+	logger.Info(fmt.Sprintf("User authenticated %#v", userDomain))
+	logger.Info(fmt.Sprintf("User authenticated %v", userDomain))
+	logger.Info(fmt.Sprintf("User authenticated %T", userDomain))
+	logger.Info(fmt.Sprintf("User authenticated %%", userDomain))
 }
 
 func RemoveBearer(token string) string {

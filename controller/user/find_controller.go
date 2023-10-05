@@ -15,6 +15,7 @@ func (uc *userControllerInterface) FindUserById(c *gin.Context) {
 
 	logger.Info("init FindUserById find_controller", zap.String("journey", "FindUserById"))
 	id := c.Param("id")
+
 	if _, err := primitive.ObjectIDFromHex(id); err != nil {
 		message := "ID não é válido"
 		logger.Error(message, err, zap.String("journey", "FindUserById"))
