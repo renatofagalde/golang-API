@@ -39,5 +39,9 @@ docker container rm -f $(docker container ls -aq)
 
 ### Stopping and Removing All Containers
 ```shell
-docker ps -aq | xargs docker stop | xargs docker rm
+sudo docker ps -aq | sudo xargs docker stop | sudo xargs docker rm
+
+sudo docker stop $(docker ps -a -q)
+sudo docker rm $(docker ps -a -q)
+
 ```

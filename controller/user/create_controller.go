@@ -2,7 +2,6 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
 	"golang-basic/config/logger"
 	"golang-basic/config/validation"
 	"golang-basic/controller/model/request"
@@ -12,13 +11,13 @@ import (
 )
 
 func (uc *userControllerInterface) Create(c *gin.Context) {
-	logger.Info("init create userController", zap.String("journey", "createUser"))
+	logger.Info("init create userController")
 
 	var userRequest request.UserRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		errRest := validation.ValidateUserError(err)
-		logger.Error("Erro ao validar user", errRest, zap.String("journey", "createUser"))
+		logger.Error("Erro ao validar user", errRest)
 		c.JSON(errRest.Code, errRest)
 		return
 	}
@@ -28,9 +27,10 @@ func (uc *userControllerInterface) Create(c *gin.Context) {
 	domainResult, err := uc.service.CreateService(domain)
 	if err != nil {
 		c.JSON(err.Code, err)
-		logger.Error("Erro ao chamar o create ", err, zap.String("journey", "createUser"))
+		logger.Error("Erro ao chamar o create ", err)
 		return
 	}
-	logger.Info("init create userController", zap.String("journey", "createUser"))
+	logger.Info("init create userController")
+
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domainResult))
 }
