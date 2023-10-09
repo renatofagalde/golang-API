@@ -69,9 +69,6 @@ func VerifyTokenMiddleware(c *gin.Context) {
 	}
 
 	logger.Info(fmt.Sprintf("User authenticated %#v", userDomain))
-	logger.Info(fmt.Sprintf("User authenticated %v", userDomain))
-	logger.Info(fmt.Sprintf("User authenticated %T", userDomain))
-	logger.Info(fmt.Sprintf("User authenticated %%", userDomain))
 }
 
 func RemoveBearer(token string) string {

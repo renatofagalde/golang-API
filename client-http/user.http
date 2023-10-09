@@ -1,12 +1,16 @@
 ### RequestUserByID
 GET http://{{host}}:{{port}}/{{user_id}}
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW8xQHRlc3RlLmNvbS5iciIsImV4cCI6MTY5NjU4NTkyOSwiaWQiOiI2NTFmMmJlNWUyMGNkODYwMGM4NjdiNWUiLCJuYW1lIjoiVXN1YXJpbyAxIHVwZGF0ZSJ9.GYqeYOhQlw-AeuMe3WHFBdkpwQk01YVqdkCqiUSdY9E
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW8xQHRlc3RlLmNvbS5iciIsImV4cCI6MTY5NjkyMzUzMiwiaWQiOiI2NTFmMmJlNWUyMGNkODYwMGM4NjdiNWUiLCJuYW1lIjoiVXN1YXJpbyAxIHVwZGF0ZSJ9.6Bks-IEbh7fTssAfaxOrd99GFpTOpaR00tYZfbzpLGI
+X-Request-ID: X-Request___ID
+X-Jorney-Action: findByID
 
 ### RequestUserByEmail
 GET http://{{host}}:{{port}}/email/{{email}}
 Content-Type: application/json
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW8xQHRlc3RlLmNvbS5iciIsImV4cCI6MTY5NjkyMzUzMiwiaWQiOiI2NTFmMmJlNWUyMGNkODYwMGM4NjdiNWUiLCJuYW1lIjoiVXN1YXJpbyAxIHVwZGF0ZSJ9.6Bks-IEbh7fTssAfaxOrd99GFpTOpaR00tYZfbzpLGI
+X-Request-ID: X-Request___EMAIL
+X-Jorney-Action: findByEmail
 
 
 ### RequestCreateUser-200

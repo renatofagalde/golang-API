@@ -12,14 +12,14 @@ import (
 )
 
 func (uc *userControllerInterface) Update(c *gin.Context) {
-	logger.Info("init update userController", zap.String("journey", "updateUser"))
+	logger.Info("init update userController")
 
 	var userRequest request.UserUpdateRequest
 	id := c.Param("id")
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil || strings.TrimSpace(id) == "" {
 		errRest := validation.ValidateUserError(err)
-		logger.Error("Erro ao validar user", errRest, zap.String("journey", "updateUser"))
+		logger.Error("Erro ao validar user", errRest)
 		c.JSON(errRest.Code, errRest)
 		return
 	}
@@ -28,11 +28,10 @@ func (uc *userControllerInterface) Update(c *gin.Context) {
 	err := uc.service.UpdateService(id, domain)
 	if err != nil {
 		c.JSON(err.Code, err)
-		logger.Error("Erro ao chamar o update ", err, zap.String("journey", "updateUser"))
+		logger.Error("Erro ao chamar o update ", err)
 		return
 	}
 	logger.Info("init update userController successfuly",
-		zap.String("id", id),
-		zap.String("journey", "updateUser"))
+		zap.String("id", id))
 	c.Status(http.StatusOK)
 }

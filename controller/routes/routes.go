@@ -7,6 +7,7 @@ import (
 )
 
 func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface) {
+
 	r.GET("/:id", model.VerifyTokenMiddleware, userController.FindUserById)
 	r.PUT("/:id", model.VerifyTokenMiddleware, userController.Update)
 	r.GET("/email/:email", model.VerifyTokenMiddleware, userController.FindUserByEmail)

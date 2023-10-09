@@ -8,18 +8,17 @@ import (
 )
 
 func (uc *userControllerInterface) Delete(c *gin.Context) {
-	logger.Info("init delete userController", zap.String("journey", "deleteUser"))
+	logger.Info("init delete userController")
 
 	id := c.Param("id")
 
 	err := uc.service.DeleteService(id)
 	if err != nil {
 		c.JSON(err.Code, err)
-		logger.Error("Erro ao chamar o delete ", err, zap.String("journey", "deleteUser"))
+		logger.Error("Erro ao chamar o delete ", err)
 		return
 	}
 	logger.Info("init delete userController successfuly",
-		zap.String("id", id),
-		zap.String("journey", "deleteUser"))
+		zap.String("id", id))
 	c.Status(http.StatusOK)
 }

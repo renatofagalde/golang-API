@@ -1,14 +1,13 @@
 package service
 
 import (
-	"go.uber.org/zap"
 	"golang-basic/config/logger"
 	"golang-basic/config/rest_err"
 	"golang-basic/model"
 )
 
 func (ud *userDomainService) CreateService(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr) {
-	logger.Info("init createUser model", zap.String("journey", "createUser"))
+	logger.Info("init createUser model")
 
 	user, _ := ud.FindUserByEmailService(userDomain.GetEmail())
 	if user != nil {
