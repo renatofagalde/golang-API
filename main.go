@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"golang-basic/config/database/mongodb"
@@ -20,6 +21,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error ao conectar no no banco, error=%s", err.Error())
 		return
+	} else {
+		fmt.Println("conexao com sucesso")
 	}
 
 	userController := initDependencies(database)
