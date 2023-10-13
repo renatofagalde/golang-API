@@ -1,8 +1,12 @@
 version: '3.8'
 services:
   mongodb:
+    environment:
+      MONGO_INITDB_DATABASE: crud
     image: mongo:6-jammy
     ports:
       - '27017:27017'
+    volumes:
+      - ./_miscellaneous/mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 #    volumes:
 #      - ./data_local:/data/db

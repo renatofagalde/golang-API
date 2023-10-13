@@ -1,5 +1,5 @@
 ```shell
-golang-basicgo mod init golang-basic
+golang-basic go mod init golang-basic
 ```
 
 ```shell
@@ -44,4 +44,10 @@ sudo docker ps -aq | sudo xargs docker stop | sudo xargs docker rm
 sudo docker stop $(docker ps -a -q)
 sudo docker rm $(docker ps -a -q)
 
+```
+
+### docker sudo
+```shell
+sudo usermod -aG docker $USER
+sudo reboot
 ```

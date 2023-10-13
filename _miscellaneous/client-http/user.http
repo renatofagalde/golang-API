@@ -1,7 +1,7 @@
 ### RequestUserByID
 GET http://{{host}}:{{port}}/{{user_id}}
-Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW8xQHRlc3RlLmNvbS5iciIsImV4cCI6MTY5NjkyMzUzMiwiaWQiOiI2NTFmMmJlNWUyMGNkODYwMGM4NjdiNWUiLCJuYW1lIjoiVXN1YXJpbyAxIHVwZGF0ZSJ9.6Bks-IEbh7fTssAfaxOrd99GFpTOpaR00tYZfbzpLGI
+Content-Type: application/json
 X-Request-ID: X-Request___ID
 X-Jorney-Action: findByID
 
