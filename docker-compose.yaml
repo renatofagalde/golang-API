@@ -2,7 +2,7 @@ version: '3.8'
 services:
   mongodb:
     environment:
-      MONGO_INITDB_DATABASE: crud
+      MONGO_INITDB_DATABASE: api-rede-social
     image: mongo:6-jammy
     ports:
       - '27017:27017'
