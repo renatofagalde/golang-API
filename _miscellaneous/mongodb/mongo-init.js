@@ -1,8 +1,6 @@
-db = db.getSiblingDB('local');
+db.createCollection('users'); // essa linha não precisa já que estou fazendo o insert na linha 3
 
-db.createCollection('users');
-/*
-db.sample_collection.insertMany([
+db.users.insertMany([
     {
         ID: '1',
         email: 'renato@likwi.com.br',
@@ -10,4 +8,4 @@ db.sample_collection.insertMany([
         name: 'renato',
         age: 18
     }
-]);*/
+]);
