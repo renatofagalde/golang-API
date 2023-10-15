@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 	"golang-basic/config/logger"
@@ -24,5 +25,6 @@ func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (mode
 	}
 
 	value.ID = result.InsertedID.(primitive.ObjectID)
+	logger.Info(fmt.Sprintf("init create user -> %#v <- repository success", value), zap.String("journey", "createUser"))
 	return convert.ConvertEntityToDomain(*value), nil
 }

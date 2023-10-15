@@ -3,10 +3,10 @@ package model
 import "golang-basic/config/rest_err"
 
 // constructor
-func NewUserDomain(email string, passord string, name string, age int8) UserDomainInterface {
+func NewUserDomain(email string, password string, name string, age int8) UserDomainInterface {
 	return &userDomain{
 		email:    email,
-		password: passord,
+		password: password,
 		name:     name,
 		age:      age,
 	}
