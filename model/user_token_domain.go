@@ -46,6 +46,7 @@ func VerifyTokenMiddleware(c *gin.Context) {
 
 		errRest := rest_err.NewUnauthorizedRequestError(TOKEN_INVALIDO)
 		c.JSON(errRest.Code, errRest)
+		c.Abort()
 		return nil, errRest
 	})
 
@@ -53,6 +54,7 @@ func VerifyTokenMiddleware(c *gin.Context) {
 		errRest := rest_err.NewUnauthorizedRequestError(TOKEN_INVALIDO)
 		c.JSON(errRest.Code, errRest)
 		c.Abort()
+		return
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
@@ -60,6 +62,7 @@ func VerifyTokenMiddleware(c *gin.Context) {
 		errRest := rest_err.NewUnauthorizedRequestError(TOKEN_INVALIDO)
 		c.JSON(errRest.Code, errRest)
 		c.Abort()
+		return
 	}
 
 	userDomain := &userDomain{
