@@ -17,6 +17,8 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
+	//mysql deprecated
+	//database, err = mysqldb.NewMySQLGORMConnection(context.Background())
 	database, err := mongodb.NewMongoDBConnection(context.Background())
 	if err != nil {
 		log.Fatalf("Error ao conectar no no banco, error=%s", err.Error())

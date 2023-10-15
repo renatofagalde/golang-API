@@ -32,6 +32,17 @@ export MONGODB_VERSION=6.0-ubi8
 docker run --name mongodb -d mongodb/mongodb-community-server:$MONGODB_VERSION
 ```
 
+- GORM
+```shell
+go get -u gorm.io/gorm
+```
+
+- Mysql 
+```shell
+go get -u gorm.io/driver/mysqldb
+```
+
+
 ### remove all container
 ```shell
 docker container rm -f $(docker container ls -aq)

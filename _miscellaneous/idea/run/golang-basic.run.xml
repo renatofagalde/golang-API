@@ -2,6 +2,13 @@
   <configuration default="false" name="golang-basic" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="golang-basic" />
     <working_directory value="$PROJECT_DIR$" />
+    <envs>
+      <env name="MYSQL_DB_URL" value="database-api-space.aivencloud.com" />
+      <env name="MYSQL_DB_PORT" value="15937" />
+      <env name="MYSQL_DB_SCHEMA" value="dev" />
+      <env name="MYSQL_DB_USER" value="avnadmin" />
+      <env name="MYSQL_DB_PASSWORD" value="AVNS_ELJc2UJaav2MRreLaYC" />
+    </envs>
     <EXTENSION ID="software.aws.toolkits.jetbrains.core.execution.GoAwsConnectionRunConfigurationExtension">
       <option name="credential" />
       <option name="region" />
