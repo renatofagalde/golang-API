@@ -15,10 +15,10 @@ const (
 )
 
 func TestUserRepository_CreateUser(t *testing.T) {
-	database_name := "user_database_test"
-	colleaction_name := "user_collection_test"
+	databaseName := "user_database_test"
+	colleactionName := "user_collection_test"
 
-	os.Setenv("MONGO_DB_COLLECTION", colleaction_name)
+	os.Setenv("MONGO_DB_COLLECTION", colleactionName)
 	defer os.Clearenv()
 
 	mtestDB := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
@@ -30,7 +30,7 @@ func TestUserRepository_CreateUser(t *testing.T) {
 			{Key: "n", Value: 1},
 			{Key: "acknowledged", Value: true},
 		})
-		databasemock := mt.Client.Database(database_name)
+		databasemock := mt.Client.Database(databaseName)
 
 		repo := NewUserRepository(databasemock)
 		domain := model.NewUserDomain(EMAIL, "password", "test", 18)
@@ -50,7 +50,7 @@ func TestUserRepository_CreateUser(t *testing.T) {
 		mt.AddMockResponses(bson.D{
 			{Key: "ok", Value: 0},
 		})
-		databasemock := mt.Client.Database(database_name)
+		databasemock := mt.Client.Database(databaseName)
 
 		repo := NewUserRepository(databasemock)
 		domain := model.NewUserDomain(EMAIL, "password", "test", 18)
