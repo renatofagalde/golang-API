@@ -29,7 +29,9 @@ go get github.com/golang-jwt/jwt
 ### Instalação e uso do mockgen
 - https://www.youtube.com/watch?v=pTGdAhnFP3c
 - criar pastas test/mocks
+- lembrar de criar o arquivo destination antes de rodar o comando
 -  mockgen -source=model/repository/user_repository.go -destination=test/mocks/user_repository_mock.go -package=mocks
+-  mockgen -source=model/user_domain_interface.go -destination=test/mocks/user_domain_interface_mock.go -package=mocks
 ```shell
 go install go.uber.org/mock/mockgen@latest
 ```

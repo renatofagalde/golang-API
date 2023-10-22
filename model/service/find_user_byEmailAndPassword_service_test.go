@@ -16,7 +16,7 @@ func TestUserDomainService_FindUserByEmailAndPasswordServices(t *testing.T) {
 	defer ctrl.Finish()
 
 	repository := mocks.NewMockUserRepository(ctrl)
-	service := &userDomainService{repository}
+	service := &userDomainService{repository} //chamando direto pq na interface ele está privado
 
 	t.Run("when_exists_an_user_returns_success", func(t *testing.T) {
 		email := "test@test.com"

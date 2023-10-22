@@ -33,8 +33,7 @@ func TestUserDomainService_CreateUserServices(t *testing.T) {
 
 		userDomain := model.NewUserDomain("test@test.com", "test", "test", 50)
 
-		repository.EXPECT().FindUserByEmail(userDomain.GetEmail()).Return(
-			nil, nil)
+		repository.EXPECT().FindUserByEmail(userDomain.GetEmail()).Return(nil, nil)
 
 		repository.EXPECT().CreateUser(userDomain).Return(
 			nil, rest_err.NewInternalServerError("error trying to create user"))
@@ -50,11 +49,9 @@ func TestUserDomainService_CreateUserServices(t *testing.T) {
 
 		userDomain := model.NewUserDomain("test@test.com", "test", "test", 50)
 
-		repository.EXPECT().FindUserByEmail(userDomain.GetEmail()).Return(
-			nil, nil)
+		repository.EXPECT().FindUserByEmail(userDomain.GetEmail()).Return(nil, nil)
 
-		repository.EXPECT().CreateUser(userDomain).Return(
-			userDomain, nil)
+		repository.EXPECT().CreateUser(userDomain).Return(userDomain, nil)
 
 		user, err := service.CreateService(userDomain)
 
