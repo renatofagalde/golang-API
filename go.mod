@@ -26,6 +26,7 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
+	github.com/google/uuid v1.4.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect

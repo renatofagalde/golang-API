@@ -1,38 +1,38 @@
 package controller
 
 import (
+	"github.com/google/uuid"
+	"github.com/stretchr/testify/assert"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"strconv"
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
 )
 
-func (uc *userControllerInterface) FindUserById(t *testing.T) {
-	recorder := httptest.NewRecorder()
-	context := GetTestGinContext(recorder)
-	params := []gin.Param{
-		{
-			Key:   "id",
-			Value: "1",
-		},
-	}
+func TestUserControllerInterface_FindUserByEmail(t *testing.T) {
 
-	u := url.Values{}
-	u.Set("foo", "bar")
+	controller := NewUserControllerInterface(nil)
 
-	MakeFunction(context, params, u)
-	GetUserId(context)
+	t.Run("email_is_invalid_returns_error", func(t *testing.T) {
 
-	//t.Errorf("Received %v (type %v), expected %v (type %v)", recorder.Code, reflect.TypeOf(recorder.Code),
-	//	http.StatusOK, reflect.TypeOf(http.StatusOK))
-	assert.EqualValues(t, http.StatusOK, recorder.Code)
-	got, _ := strconv.Atoi(recorder.Body.String())
-	assert.EqualValues(t, 1, got)
+		recorder := httptest.NewRecorder()
+		context := GetTestGinContext(recorder)
+		params := []gin.Param{
+			{
+				Key:   "email",
+				Value: "test_at_erro",
+			},
+		}
+
+		MakeRequest(context, "GET", url.Values{}, params, nil)
+		controller.FindUserByEmail(context)
+
+		assert.EqualValues(t, http.StatusBadRequest, recorder.Code)
+
+	})
 
 }
 func GetTestGinContext(recorder *httptest.ResponseRecorder) *gin.Context {
@@ -46,9 +46,10 @@ func GetTestGinContext(recorder *httptest.ResponseRecorder) *gin.Context {
 	return ctx
 }
 
-func MakeFunction(c *gin.Context, param gin.Params, u url.Values, body io.ReadCloser) {
-	c.Request.Method = "GET"
+func MakeRequest(c *gin.Context, method string, u url.Values, param gin.Params, body io.ReadCloser) {
+	c.Request.Method = method
 	c.Request.Header.Set("Content-Type", "application/json")
+	c.Request.Header.Set("X-Request-ID", uuid.NewString())
 	c.Params = param
 
 	c.Request.Body = body

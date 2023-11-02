@@ -8,7 +8,6 @@ import (
 	"golang-basic/view"
 	"net/http"
 	"net/mail"
-	"time"
 )
 
 func (uc *userControllerInterface) FindUserById(c *gin.Context) {
@@ -24,7 +23,7 @@ func (uc *userControllerInterface) FindUserById(c *gin.Context) {
 		c.JSON(errorMessage.Code, errorMessage)
 		return
 	}
-	time.Sleep(3 * time.Second)
+
 	userDomain, err := uc.service.FindUserByIDService(id)
 	if err != nil {
 		c.JSON(err.Code, err)
@@ -46,7 +45,7 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 		c.JSON(errorMessage.Code, errorMessage)
 		return
 	}
-	time.Sleep(3 * time.Second)
+
 	userDomain, err := uc.service.FindUserByEmailService(email)
 	if err != nil {
 		message := "Erro ao recuperar email"
