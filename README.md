@@ -26,6 +26,14 @@ go get github.com/google/uuid
 go get github.com/golang-jwt/jwt
 ```
 
+```shell
+go get github.com/stretchr/testify
+``
+
+```shell
+go get github.com/google/uuid
+``
+
 ### Instalação e uso do mockgen
 - https://www.youtube.com/watch?v=pTGdAhnFP3c
 - criar pastas test/mocks
