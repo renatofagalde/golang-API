@@ -10,9 +10,9 @@ import (
 	"net/mail"
 )
 
-func (uc *userControllerInterface) FindUserById(c *gin.Context) {
+func (uc *userControllerInterface) FindUserByID(c *gin.Context) {
 
-	logger.Info("init FindUserById find_controller")
+	logger.Info("init FindUserByID find_controller")
 	id := c.Param("id")
 
 	if _, err := primitive.ObjectIDFromHex(id); err != nil {
@@ -31,7 +31,7 @@ func (uc *userControllerInterface) FindUserById(c *gin.Context) {
 		logger.Error(message, err)
 		return
 	}
-	logger.Info("init FindUserById find_controller successfuly")
+	logger.Info("init FindUserByID find_controller successfuly")
 
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(userDomain))
 }
