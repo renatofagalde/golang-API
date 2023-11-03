@@ -8,7 +8,7 @@ X-Jorney-Action: findByID
 ### RequestUserByEmail
 GET http://{{host}}:{{port}}/email/{{email}}
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW8xQHRlc3RlLmNvbS5iciIsImV4cCI6MTY5NjkyMzUzMiwiaWQiOiI2NTFmMmJlNWUyMGNkODYwMGM4NjdiNWUiLCJuYW1lIjoiVXN1YXJpbyAxIHVwZGF0ZSJ9.6Bks-IEbh7fTssAfaxOrd99GFpTOpaR00tYZfbzpLGI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIwMUB0ZXN0LmNvbSIsImV4cCI6MTY5OTAwNTkyNiwiaWQiOiI2NTQ0MWQxNzZjMWE0MGIzZjgwNTVkYzYiLCJuYW1lIjoidXNlciAwMSJ9.Bj6YMmIFcA4S7Klemcvk522n0T3t4D4y_Syo_gDvt3s
 X-Request-ID: X-Request___EMAIL
 X-Jorney-Action: findByEmail
 

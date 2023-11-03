@@ -3,6 +3,9 @@ package controller
 import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
+	"go.uber.org/mock/gomock"
+	"golang-basic/config/rest_err"
+	"golang-basic/test/mocks"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -14,7 +17,12 @@ import (
 
 func TestUserControllerInterface_FindUserByEmail(t *testing.T) {
 
-	controller := NewUserControllerInterface(nil)
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	service := mocks.NewMockUserDomainService(ctrl)
+
+	controller := NewUserControllerInterface(service)
 
 	t.Run("email_is_invalid_returns_error", func(t *testing.T) {
 
@@ -31,6 +39,27 @@ func TestUserControllerInterface_FindUserByEmail(t *testing.T) {
 		controller.FindUserByEmail(context)
 
 		assert.EqualValues(t, http.StatusBadRequest, recorder.Code)
+
+	})
+
+	t.Run("email_is_valid_service_return_error", func(t *testing.T) {
+
+		recorder := httptest.NewRecorder()
+		context := GetTestGinContext(recorder)
+		params := []gin.Param{
+			{
+				Key:   "email",
+				Value: "test@test.com",
+			},
+		}
+
+		service.EXPECT().FindUserByEmailService("test@test.com").Return(nil,
+			rest_err.NewInternalServerError("error test"))
+
+		MakeRequest(context, "GET", url.Values{}, params, nil)
+		controller.FindUserByEmail(context)
+
+		assert.EqualValues(t, http.StatusInternalServerError, recorder.Code)
 
 	})
 
