@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
-	"golang-basic/config/logger"
-	"golang-basic/config/rest_err"
+	"golang-API/config/logger"
+	"golang-API/config/rest_err"
 	"net/http"
 )
 

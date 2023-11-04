@@ -6,8 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/integration/mtest"
-	"golang-basic/model/repository/entity"
-	"golang-basic/model/repository/entity/convert"
+	"golang-API/model/repository/entity"
+	"golang-API/model/repository/entity/convert"
 	"os"
 	"testing"
 )

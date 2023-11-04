@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"golang-basic/config/database/mongodb"
-	"golang-basic/config/logger"
-	"golang-basic/controller/routes"
+	"golang-API/config/database/mongodb"
+	"golang-API/config/logger"
+	"golang-API/controller/routes"
 	"log"
 )
 

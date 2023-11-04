@@ -7,11 +7,11 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
-	"golang-basic/config/logger"
-	"golang-basic/config/rest_err"
-	"golang-basic/model"
-	"golang-basic/model/repository/entity"
-	"golang-basic/model/repository/entity/convert"
+	"golang-API/config/logger"
+	"golang-API/config/rest_err"
+	"golang-API/model"
+	"golang-API/model/repository/entity"
+	"golang-API/model/repository/entity/convert"
 	"os"
 )
 

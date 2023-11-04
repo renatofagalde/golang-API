@@ -2,7 +2,7 @@ package convert
 
 import (
 	"go.mongodb.org/mongo-driver/bson"
-	"golang-basic/model/repository/entity"
+	"golang-API/model/repository/entity"
 )
 
 func ConvertEntityToBson(userEntity entity.UserEntity) bson.D {

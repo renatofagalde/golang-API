@@ -1,8 +1,8 @@
 package convert
 
 import (
-	"golang-basic/model"
-	"golang-basic/model/repository/entity"
+	"golang-API/model"
+	"golang-API/model/repository/entity"
 )
 
 func ConvertDomainToEntity(domain model.UserDomainInterface) *entity.UserEntity {

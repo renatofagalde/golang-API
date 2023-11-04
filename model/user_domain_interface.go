@@ -1,6 +1,6 @@
 package model
 
-import "golang-basic/config/rest_err"
+import "golang-API/config/rest_err"
 
 // constructor
 func NewUserDomain(email string, password string, name string, age int8) UserDomainInterface {

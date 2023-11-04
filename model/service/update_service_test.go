@@ -4,9 +4,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/mock/gomock"
-	"golang-basic/config/rest_err"
-	"golang-basic/model"
-	"golang-basic/test/mocks"
+	"golang-API/config/rest_err"
+	"golang-API/model"
+	"golang-API/test/mocks"
 	"testing"
 )
 

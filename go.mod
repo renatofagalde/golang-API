@@ -1,4 +1,4 @@
-module golang-basic
+module golang-API
 
 go 1.21.3
 

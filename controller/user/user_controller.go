@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-basic/model/service"
+	"golang-API/model/service"
 )
 
 func NewUserControllerInterface(serviceInterface service.UserDomainService) UserControllerInterface {

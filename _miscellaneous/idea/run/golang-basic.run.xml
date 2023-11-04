@@ -15,7 +15,7 @@
       <option name="useCurrentConnection" value="false" />
     </EXTENSION>
     <kind value="PACKAGE" />
-    <package value="golang-basic" />
+    <package value="golang-API" />
     <directory value="$PROJECT_DIR$" />
     <filePath value="$PROJECT_DIR$/main.go" />
     <method v="2" />
