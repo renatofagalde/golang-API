@@ -9,8 +9,8 @@
 package mocks
 
 import (
-	rest_err "golang-basic/config/rest_err"
-	model "golang-basic/model"
+	rest_err "golang-API/config/rest_err"
+	model "golang-API/model"
 	reflect "reflect"
 
 	gomock "go.uber.org/mock/gomock"

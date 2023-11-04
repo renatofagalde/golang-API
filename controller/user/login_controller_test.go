@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 	"golang-API/config/rest_err"
@@ -17,7 +18,7 @@ import (
 	"testing"
 )
 
-func TestUserControllerInterface_Create(t *testing.T) {
+func TestUserControllerInterface_Login(t *testing.T) {
 	crtl := gomock.NewController(t)
 	defer crtl.Finish()
 
@@ -28,37 +29,16 @@ func TestUserControllerInterface_Create(t *testing.T) {
 		recorder := httptest.NewRecorder()
 		context := GetTestGinContext(recorder)
 
-		userRequest := request.UserRequest{
+		userRequest := request.UserLoginRequest{
 			Email:    "test_error@test.com",
 			Password: "123",
-			Name:     "test test",
-			Age:      19,
 		}
 
 		b, _ := json.Marshal(userRequest)
 		stringReader := io.NopCloser(strings.NewReader(string(b)))
 
 		MakeRequest(context, "POST", url.Values{}, nil, stringReader)
-		controller.Create(context)
-
-		assert.EqualValues(t, http.StatusBadRequest, recorder.Code)
-	})
-	t.Run("validation_name_got_error", func(t *testing.T) {
-		recorder := httptest.NewRecorder()
-		context := GetTestGinContext(recorder)
-
-		userRequest := request.UserRequest{
-			Email:    "test_error@test.com",
-			Password: "1234567",
-			Name:     "a",
-			Age:      19,
-		}
-
-		b, _ := json.Marshal(userRequest)
-		stringReader := io.NopCloser(strings.NewReader(string(b)))
-
-		MakeRequest(context, "POST", url.Values{}, nil, stringReader)
-		controller.Create(context)
+		controller.Login(context)
 
 		assert.EqualValues(t, http.StatusBadRequest, recorder.Code)
 	})
@@ -90,19 +70,16 @@ func TestUserControllerInterface_Create(t *testing.T) {
 		userRequest := request.UserRequest{
 			Email:    "test@test.com",
 			Password: "1234567@",
-			Name:     "test of name",
-			Age:      18,
 		}
 
-		domain := model.NewUserDomain(userRequest.Email,
-			userRequest.Password, userRequest.Name, userRequest.Age)
+		domain := model.NewUserLoginDomain(userRequest.Email, userRequest.Password)
 		b, _ := json.Marshal(userRequest)
 		stringReader := io.NopCloser(strings.NewReader(string(b)))
 
-		service.EXPECT().CreateService(domain).Return(nil, rest_err.NewInternalServerError("error test"))
+		service.EXPECT().LoginService(domain).Return(nil, "", rest_err.NewInternalServerError("error test"))
 
 		MakeRequest(context, "POST", url.Values{}, []gin.Param{}, stringReader)
-		controller.Create(context)
+		controller.Login(context)
 
 		assert.EqualValues(t, http.StatusInternalServerError, recorder.Code)
 
@@ -112,25 +89,23 @@ func TestUserControllerInterface_Create(t *testing.T) {
 
 		recorder := httptest.NewRecorder()
 		context := GetTestGinContext(recorder)
+		token := uuid.NewString()
 
 		userRequest := request.UserRequest{
 			Email:    "test@test.com",
 			Password: "1234567@",
-			Name:     "test of name",
-			Age:      18,
 		}
-
-		domain := model.NewUserDomain(userRequest.Email,
-			userRequest.Password, userRequest.Name, userRequest.Age)
+		domain := model.NewUserLoginDomain(userRequest.Email, userRequest.Password)
 		b, _ := json.Marshal(userRequest)
 		stringReader := io.NopCloser(strings.NewReader(string(b)))
 
-		service.EXPECT().CreateService(domain).Return(domain, nil)
+		service.EXPECT().LoginService(domain).Return(domain, token, nil)
 
 		MakeRequest(context, "POST", url.Values{}, []gin.Param{}, stringReader)
-		controller.Create(context)
+		controller.Login(context)
 
 		assert.EqualValues(t, http.StatusOK, recorder.Code)
+		assert.EqualValues(t, recorder.Header().Values("Authorization")[0], token)
 
 	})
 

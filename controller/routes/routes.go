@@ -2,8 +2,8 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	controller "golang-basic/controller/user"
-	"golang-basic/model"
+	controller "golang-API/controller/user"
+	"golang-API/model"
 )
 
 func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface) {

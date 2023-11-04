@@ -3,11 +3,11 @@ package mysqldb
 import (
 	"context"
 	"fmt"
-	"golang-basic/model/repository/entity"
+	"golang-API/model/repository/entity"
 	"gorm.io/driver/mysql"
 	"os"
 
-	"golang-basic/config/logger"
+	"golang-API/config/logger"
 	"gorm.io/gorm"
 )
 

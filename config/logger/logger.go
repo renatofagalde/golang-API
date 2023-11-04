@@ -1,7 +1,6 @@
 package logger
 
 import (
-	"fmt"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
@@ -39,17 +38,11 @@ func init() {
 }
 
 func Info(message string, tags ...zap.Field) {
-
-	log.Named(X_REQUEST_ID_CHAVE)
-	fmt.Println(log.Named(X_REQUEST_ID_CHAVE))
-
 	log.Info(message, tags...)
 	log.Sync()
 }
 func Error(message string, err error, tags ...zap.Field) {
 	tags = append(tags, zap.NamedError("error", err))
-	tags = append(tags, zap.String(X_REQUEST_ID_CHAVE, "a"))
-	//tags = append(tags, zap.String(X_JORNEY_ACTION_KEY, X_JORNEY_ACTION_VALUE))
 	log.Error(message, tags...)
 	log.Sync()
 }

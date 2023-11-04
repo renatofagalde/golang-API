@@ -3,10 +3,10 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
-	"golang-basic/config/logger"
-	"golang-basic/config/validation"
-	"golang-basic/controller/model/request"
-	"golang-basic/model"
+	"golang-API/config/logger"
+	"golang-API/config/validation"
+	"golang-API/controller/model/request"
+	"golang-API/model"
 	"net/http"
 	"strings"
 )

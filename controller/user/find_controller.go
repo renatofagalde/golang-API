@@ -3,9 +3,9 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"golang-basic/config/logger"
-	"golang-basic/config/rest_err"
-	"golang-basic/view"
+	"golang-API/config/logger"
+	"golang-API/config/rest_err"
+	"golang-API/view"
 	"net/http"
 	"net/mail"
 )

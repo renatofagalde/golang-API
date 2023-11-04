@@ -1,8 +1,8 @@
 package view
 
 import (
-	"golang-basic/controller/model/response"
-	"golang-basic/model"
+	"golang-API/controller/model/response"
+	"golang-API/model"
 )
 
 func ConvertDomainToResponse(userDomain model.UserDomainInterface) response.UserResponse {

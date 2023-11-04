@@ -1,9 +1,9 @@
 package service
 
 import (
-	"golang-basic/config/rest_err"
-	"golang-basic/model"
-	"golang-basic/model/repository"
+	"golang-API/config/rest_err"
+	"golang-API/model"
+	"golang-API/model/repository"
 )
 
 func NewUserDomainService(userRepository repository.UserRepository) UserDomainService {

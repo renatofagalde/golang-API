@@ -2,8 +2,8 @@ package repository
 
 import (
 	"go.mongodb.org/mongo-driver/mongo"
-	"golang-basic/config/rest_err"
-	"golang-basic/model"
+	"golang-API/config/rest_err"
+	"golang-API/model"
 )
 
 type userRepository struct {

@@ -5,8 +5,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
-	"golang-basic/config/logger"
-	"golang-basic/config/rest_err"
+	"golang-API/config/logger"
+	"golang-API/config/rest_err"
 	"os"
 )
 

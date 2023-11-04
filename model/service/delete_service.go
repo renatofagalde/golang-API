@@ -1,8 +1,8 @@
 package service
 
 import (
-	"golang-basic/config/logger"
-	"golang-basic/config/rest_err"
+	"golang-API/config/logger"
+	"golang-API/config/rest_err"
 )
 
 func (ud *userDomainService) DeleteService(id string) *rest_err.RestErr {
