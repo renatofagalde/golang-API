@@ -6,7 +6,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/mock/gomock"
 	"golang-basic/config/rest_err"
-	"golang-basic/model"
 	"golang-basic/test/mocks"
 	"net/http"
 	"net/http/httptest"
@@ -52,11 +51,10 @@ func TestDeleteController_DeleteUser(t *testing.T) {
 			},
 		}
 
-		service.EXPECT().FindUserByIDService(ID).Return(nil,
-			rest_err.NewInternalServerError("error test"))
+		service.EXPECT().DeleteService(ID).Return(rest_err.NewInternalServerError("error test"))
 
-		MakeRequest(context, "GET", url.Values{}, params, nil)
-		controller.FindUserByID(context)
+		MakeRequest(context, "DELETE", url.Values{}, params, nil)
+		controller.Delete(context)
 
 		assert.EqualValues(t, http.StatusInternalServerError, recorder.Code)
 
@@ -74,11 +72,10 @@ func TestDeleteController_DeleteUser(t *testing.T) {
 			},
 		}
 
-		service.EXPECT().FindUserByIDService(ID).
-			Return(model.NewUserDomain("test@test.com", "pass", "name", 18), nil)
+		service.EXPECT().DeleteService(ID).Return(nil)
 
-		MakeRequest(context, "GET", url.Values{}, params, nil)
-		controller.FindUserByID(context)
+		MakeRequest(context, "DELETE", url.Values{}, params, nil)
+		controller.Delete(context)
 
 		assert.EqualValues(t, http.StatusOK, recorder.Code)
 
