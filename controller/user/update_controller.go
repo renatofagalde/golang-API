@@ -2,8 +2,10 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 	"golang-API/config/logger"
+	"golang-API/config/rest_err"
 	"golang-API/config/validation"
 	"golang-API/controller/model/request"
 	"golang-API/model"
@@ -23,6 +25,13 @@ func (uc *userControllerInterface) Update(c *gin.Context) {
 		c.JSON(errRest.Code, errRest)
 		return
 	}
+
+	if _, err := primitive.ObjectIDFromHex(id); err != nil {
+		errRest := rest_err.NewBadRequestError("Invalid userId, must be a hex value")
+		c.JSON(errRest.Code, errRest)
+		return
+	}
+
 	domain := model.NewUseUpdaterDomain(userRequest.Name, userRequest.Age)
 
 	err := uc.service.UpdateService(id, domain)
