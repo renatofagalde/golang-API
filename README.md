@@ -34,6 +34,16 @@ go get github.com/stretchr/testify
 go get github.com/google/uuid
 ```
 
+```shell
+go test ./... -v --cover
+```
+
+- instalacao dockertest
+```shell
+go get -u github.com/ory/dockertest/v3
+```
+
+
 ### Instalação e uso do mockgen
 - https://www.youtube.com/watch?v=pTGdAhnFP3c
 - criar pastas test/mocks
